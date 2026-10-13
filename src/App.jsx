@@ -10,7 +10,7 @@ import ClientDashboard from "./pages/ClientDashboard";
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/bamb-app">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
