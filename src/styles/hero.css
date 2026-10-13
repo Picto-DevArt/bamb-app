@@ -1,0 +1,213 @@
+
+/* Carrusel principal */
+.hero {
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+.hero__viewport {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  aspect-ratio: 4/ 5;
+  background: var(--color-surface);
+}
+
+.hero__track {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 800ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.hero__slide {
+  position: relative;
+  flex: 0 0 100%;
+  min-width: 0;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--color-primary);
+  background-position: center;
+  background-size: cover;
+}
+
+/* Reemplaza estas rutas por tus imágenes */
+.hero__slide--one {
+  background-image:
+    linear-gradient(90deg, rgba(25, 12, 38, 0.65), transparent),
+    url("/images/hero-1.jpg");
+}
+
+.hero__slide--two {
+  background-image:
+    linear-gradient(90deg, rgba(25, 12, 38, 0.65), transparent),
+    url("/images/hero-2.jpg");
+}
+
+.hero__slide--three {
+  background-image:
+    linear-gradient(90deg, rgba(25, 12, 38, 0.65), transparent),
+    url("/images/hero-3.jpg");
+}
+
+/* Capa de texto */
+.hero__overlay {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: clamp(20px, 6vw, 80px);
+}
+
+.hero__copy {
+  max-width: 600px;
+  color: #fff;
+}
+
+.hero__eyebrow {
+  margin: 0 0 12px;
+  color: var(--color-secondary);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+}
+
+.hero__copy h1 {
+  margin: 0;
+  font-size: clamp(1.8rem, 5vw, 4.5rem);
+  font-weight: 750;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+}
+
+.hero__description {
+  max-width: 420px;
+  margin: 16px 0 0;
+  font-size: clamp(0.9rem, 1.7vw, 1.15rem);
+  line-height: 1.5;
+}
+
+/* Controles laterales */
+.hero__control {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 50%;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0.65;
+  transform: translateY(-50%);
+  transition:
+    opacity 400ms ease,
+    background-color 400ms ease,
+    box-shadow 400ms ease,
+    border-color 400ms ease;
+  animation: hero-glow 3.5s ease-in-out infinite;
+}
+
+.hero__control--previous {
+  left: clamp(12px, 3vw, 32px);
+}
+
+.hero__control--next {
+  right: clamp(12px, 3vw, 32px);
+  animation-delay: 1.75s;
+}
+
+.hero__control:hover,
+.hero__control:focus-visible {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 24px rgba(255, 255, 255, 0.28);
+}
+
+.hero__control:focus-visible,
+.hero__indicator:focus-visible {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 4px;
+}
+
+/* Indicadores de posición */
+.hero__indicators {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding-top: 16px;
+}
+
+.hero__indicator {
+  width: 7px;
+  height: 7px;
+  padding: 0;
+  border: 0;
+  border-radius: 99px;
+  background: var(--color-border);
+  cursor: pointer;
+  transition:
+    width 350ms ease,
+    background-color 350ms ease;
+}
+
+.hero__indicator--active {
+  width: 24px;
+  background: var(--color-primary);
+}
+
+@keyframes hero-glow {
+  0%, 100% {
+    opacity: 0.55;
+  }
+
+  50% {
+    opacity: 0.95;
+  }
+}
+
+/* Adaptación a pantallas pequeñas */
+@media (max-width: 600px) {
+  .hero {
+    padding: 12px 0;
+  }
+
+  .hero__viewport {
+    aspect-ratio: 1.25 / 1;
+  }
+
+  .hero__control {
+    width: 38px;
+    height: 38px;
+    font-size: 1.7rem;
+  }
+
+  .hero__description {
+    max-width: 260px;
+  }
+}
+
+/* Respeta la preferencia de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+  .hero__track,
+  .hero__control,
+  .hero__indicator {
+    transition: none;
+  }
+
+  .hero__control {
+    animation: none;
+  }
+}

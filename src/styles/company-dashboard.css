@@ -1,0 +1,554 @@
+
+.company-dashboard {
+  width: min(100% - 32px, 1100px);
+  margin: 0 auto;
+  padding: 40px 0 64px;
+}
+
+.dashboard-heading {
+  margin-bottom: 28px;
+}
+
+.dashboard-eyebrow {
+  color: var(--color-primary);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.dashboard-heading h1 {
+  margin: 8px 0;
+  font-size: clamp(26px, 5vw, 36px);
+}
+
+.dashboard-heading > p:last-child {
+  max-width: 620px;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+.dashboard-summary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 36px;
+}
+
+.summary-card {
+  padding: 20px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+}
+
+.summary-card span,
+.offer-detail span {
+  display: block;
+  color: var(--color-text-muted);
+  font-size: 13px;
+}
+
+.summary-card strong {
+  display: block;
+  margin-top: 10px;
+  font-size: 30px;
+}
+
+.offers-section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.offers-section-heading h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.offers-section-heading > span {
+  color: var(--color-text-muted);
+  font-size: 13px;
+}
+
+.company-offers-list {
+  display: grid;
+  gap: 18px;
+}
+
+.company-offer-card {
+  padding: 20px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background: var(--color-background);
+  box-shadow: var(--shadow-card);
+}
+
+.offer-card-top h3 {
+  margin: 12px 0 20px;
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+.offer-status {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.status-active {
+  color: #287a45;
+  background: #e7f5eb;
+}
+
+.status-paused {
+  color: #8a5a00;
+  background: #fff2d5;
+}
+
+.status-unavailable {
+  color: #6f6a75;
+  background: #efedf1;
+}
+
+.offer-details {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px 12px;
+  padding: 18px 0;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.offer-detail strong {
+  display: block;
+  margin-top: 7px;
+  font-size: 14px;
+}
+
+.offer-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding-top: 18px;
+}
+
+.offer-action-button,
+.offer-delete-button {
+  min-height: 42px;
+  padding: 10px 15px;
+  border-radius: var(--radius-button);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.offer-action-button {
+  flex: 1;
+  border: 0;
+  color: white;
+  background: var(--color-primary);
+}
+
+.offer-action-button:disabled {
+  color: var(--color-text-muted);
+  background: #e7e3eb;
+  cursor: not-allowed;
+}
+
+.offer-delete-button {
+  border: 1px solid var(--color-border);
+  color: var(--color-error);
+  background: white;
+}
+
+.empty-offers {
+  padding: 36px 20px;
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-card);
+  text-align: center;
+}
+
+.empty-offers p {
+  color: var(--color-text-muted);
+}
+
+@media (min-width: 700px) {
+  .company-dashboard {
+    padding-top: 56px;
+  }
+
+  .company-offer-card {
+    padding: 24px;
+  }
+
+  .offer-details {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .offer-actions {
+    justify-content: flex-end;
+  }
+
+  .offer-action-button {
+    flex: initial;
+    min-width: 150px;
+  }
+}
+
+
+/* Barra superior exclusiva del panel de empresa */
+.company-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 76px;
+  padding: 12px 24px;
+  border-bottom: 1px solid var(--color-border);
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(12px);
+}
+
+.company-identity {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.company-logo {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  color: white;
+  background: var(--color-primary);
+  font-weight: 700;
+}
+
+.company-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.company-name {
+  overflow: hidden;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.company-edit-link {
+  color: var(--color-primary);
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* Botón para crear ofertas */
+.offers-section-heading > div {
+  display: grid;
+  gap: 6px;
+}
+
+.create-offer-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 10px 14px;
+  border-radius: var(--radius-button);
+  color: white;
+  background: var(--color-primary);
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+}
+
+/* Menú fijo inferior del panel */
+.company-dashboard {
+  padding-bottom: 110px;
+}
+
+.company-bottom-nav {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 8px;
+  min-height: 70px;
+  padding: 10px 16px;
+  border-top: 1px solid var(--color-border);
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 -5px 20px rgba(35, 20, 50, 0.06);
+  backdrop-filter: blur(12px);
+}
+
+.company-bottom-nav > a,
+.company-logout {
+  color: var(--color-text-muted);
+  font-size: 12px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.company-logout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .company-topbar {
+    padding: 12px 16px;
+  }
+
+  .company-name {
+    max-width: 150px;
+    font-size: 14px;
+  }
+
+  .offers-section-heading {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .create-offer-button {
+    width: 100%;
+  }
+
+  .company-bottom-nav {
+    gap: 4px;
+    padding: 8px 6px;
+  }
+
+  .company-bottom-nav > a,
+  .company-logout {
+    flex: 1;
+    font-size: 10px;
+  }
+
+  .company-logout {
+    flex-direction: column;
+    gap: 3px;
+  }
+}
+
+
+/* Botón circular para cambiar el logo */
+.company-logo-button {
+  position: relative;
+  display: block;
+  flex-shrink: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+}
+
+.company-logo-button .company-logo {
+  width: 48px;
+  height: 48px;
+  transition: opacity 180ms ease;
+}
+
+.company-logo-button:hover .company-logo {
+  opacity: 0.8;
+}
+
+.company-logo-edit {
+  position: absolute;
+  right: -2px;
+  bottom: -2px;
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border: 2px solid white;
+  border-radius: 50%;
+  color: white;
+  background: var(--color-primary);
+  font-size: 12px;
+}
+
+.company-logo-success {
+  margin: 0;
+  padding: 10px 20px;
+  color: var(--color-success);
+  background: #e7f5eb;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* Fondo y ventana modal */
+.company-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  padding: 20px;
+  background: rgba(24, 18, 30, 0.55);
+  backdrop-filter: blur(4px);
+}
+
+.company-logo-modal {
+  position: relative;
+  width: min(100%, 440px);
+  max-height: calc(100dvh - 40px);
+  overflow-y: auto;
+  padding: 30px 24px 24px;
+  border-radius: 20px;
+  background: white;
+  box-shadow: 0 20px 70px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.company-logo-modal h2 {
+  margin: 0 30px 10px;
+  font-size: 23px;
+}
+
+.company-logo-modal > p {
+  color: var(--color-text-muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.company-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  color: var(--color-text-muted);
+  background: var(--color-surface);
+  font-size: 26px;
+  cursor: pointer;
+}
+
+.company-logo-preview {
+  display: grid;
+  place-items: center;
+  width: 128px;
+  height: 128px;
+  margin: 24px auto;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  color: white;
+  background: var(--color-primary);
+  font-size: 42px;
+  font-weight: 700;
+}
+
+.company-logo-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.company-upload-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 12px 18px;
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius-button);
+  color: var(--color-primary);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.company-upload-button input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.company-upload-hint {
+  margin-top: 12px;
+  font-size: 12px !important;
+}
+
+.company-logo-error {
+  padding: 10px;
+  border-radius: 8px;
+  color: var(--color-error) !important;
+  background: #fff0f0;
+  font-size: 13px !important;
+}
+
+.company-modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.company-modal-actions button {
+  flex: 1;
+  min-height: 44px;
+  padding: 10px;
+  border-radius: var(--radius-button);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.company-modal-cancel {
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  background: white;
+}
+
+.company-modal-save {
+  border: 0;
+  color: white;
+  background: var(--color-primary);
+}
+
+.company-modal-save:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.company-logo-remove {
+  margin-top: 16px;
+  border: 0;
+  color: var(--color-error);
+  background: transparent;
+  font-size: 13px;
+  cursor: pointer;
+}

@@ -1,0 +1,207 @@
+
+.categories {
+  width: 100%;
+  padding: 40px 20px;
+}
+
+.categories__header {
+  margin-bottom: 24px;
+}
+
+.categories__header h2 {
+  margin: 0;
+  color: var(--color-text);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  letter-spacing: -0.03em;
+}
+
+.categories__header p {
+  margin: 8px 0 0;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+.categories__list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.category {
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background: var(--color-background);
+  transition: border-color 250ms ease, box-shadow 250ms ease;
+}
+
+.category--open {
+  border-color: rgba(134, 36, 221, 0.35);
+  box-shadow: var(--shadow-card);
+}
+
+.category__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  min-height: 64px;
+  padding: 18px 20px;
+  border: 0;
+  background: transparent;
+  color: var(--color-text);
+  text-align: left;
+  font-size: 1rem;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.category__trigger:hover {
+  color: var(--color-primary);
+}
+
+.category__arrow {
+  flex-shrink: 0;
+  color: var(--color-primary);
+  font-size: 1.5rem;
+  transition: transform 300ms ease;
+}
+
+.category--open .category__arrow {
+  transform: rotate(180deg);
+}
+
+.category__trigger:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: -4px;
+}
+
+.category__panel {
+  padding: 4px 20px 24px;
+  border-top: 1px solid var(--color-border);
+  animation: category-appear 300ms ease both;
+}
+
+/* Las empresas se organizan en filas */
+.company-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px 16px;
+  padding-top: 20px;
+}
+
+.company-card {
+  min-width: 0;
+  text-align: center;
+}
+
+.company-card__image {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 14px;
+  color: white;
+  font-size: clamp(1.1rem, 2.5vw, 2rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  transition: transform 250ms ease, box-shadow 250ms ease;
+}
+
+.company-card:hover .company-card__image {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-card);
+}
+
+/* Fondos provisionales hasta incorporar logos reales */
+.company-card__image--purple {
+  background: linear-gradient(135deg, #8624DD, #BD83F0);
+}
+
+.company-card__image--blue {
+  background: linear-gradient(135deg, #1688BA, #27AAE1);
+}
+
+.company-card__image--orange {
+  background: linear-gradient(135deg, #D8461A, #F15A29);
+}
+
+.company-card__image--lime {
+  background: linear-gradient(135deg, #D7DF23, #EEF28A);
+  color: #38391C;
+}
+
+.company-card__name {
+  margin: 10px 0 0;
+  color: var(--color-text);
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+@keyframes category-appear {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Tabletas: tres empresas por fila */
+@media (max-width: 800px) {
+  .company-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px 12px;
+  }
+}
+
+/* Móviles */
+@media (max-width: 480px) {
+  .categories {
+    padding: 28px 14px;
+  }
+
+  .category__trigger {
+    min-height: 58px;
+    padding: 16px;
+  }
+
+  .category__panel {
+    padding: 4px 12px 18px;
+  }
+
+  .company-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px 10px;
+    padding-top: 16px;
+  }
+
+  .company-card__name {
+    font-size: 0.78rem;
+  }
+
+  .company-card__image {
+    border-radius: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .category,
+  .category__arrow,
+  .company-card__image {
+    transition: none;
+  }
+
+  .category__panel {
+    animation: none;
+  }
+}

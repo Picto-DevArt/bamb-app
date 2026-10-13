@@ -1,0 +1,47 @@
+
+/* Identidad visual global de Bamb */
+:root {
+  /* Paleta oficial */
+  --color-primary: #8624DD;
+  --color-secondary: #D7DF23;
+  --color-blue: #27AAE1;
+  --color-orange: #F15A29;
+
+  /* Colores neutros de la interfaz */
+  --color-background: #FFFFFF;
+  --color-surface: #F8F7FA;
+  --color-text: #24212A;
+  --color-text-muted: #6F6A75;
+  --color-border: #E7E3EB;
+
+  /* Estados */
+  --color-success: #287A45;
+  --color-error: #C62828;
+
+  /* Texto */
+  --font-family-base: Arial, Helvetica, sans-serif;
+
+  /* Bordes y espacios */
+  --radius-card: 16px;
+  --radius-button: 10px;
+  --shadow-card: 0 8px 28px rgba(35, 20, 50, 0.08);
+}
+
+/* Valores globales de la aplicación */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family-base);
+  background: var(--color-background);
+  color: var(--color-text);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}

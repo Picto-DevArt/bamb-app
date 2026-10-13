@@ -1,0 +1,57 @@
+
+/* Espacio reservado para logos de marcas aliadas */
+.allied-brands {
+  width: 100%;
+  padding: 32px 20px;
+}
+
+.allied-brands__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: center;
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.allied-brands__logo {
+  width: 100%;
+  min-height: 100px;
+  background-color: var(--color-background);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+/* Cambia las rutas por los logos PNG de tus marcas */
+.allied-brands__logo--one {
+  background-image: url("/images/brand-1.jpg");
+}
+
+.allied-brands__logo--two {
+  background-image: url("/images/brand-2.png");
+}
+
+.allied-brands__logo--three {
+  background-image: url("/images/brand-3.png");
+}
+
+.allied-brands__logo--four {
+  background-image: url("/images/brand-4.png");
+}
+
+/* Adaptación para móviles */
+@media (max-width: 600px) {
+  .allied-brands {
+    padding: 24px 16px;
+  }
+
+  .allied-brands__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px 16px;
+  }
+
+  .allied-brands__logo {
+    min-height: 80px;
+  }
+}

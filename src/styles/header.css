@@ -1,0 +1,178 @@
+
+/* Encabezado de Bamb */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.96);
+  border-bottom: 1px solid var(--color-border);
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease,
+    backdrop-filter 0.3s ease;
+}
+
+/* Efecto translúcido al desplazarse */
+.header--scrolled {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 4px 18px rgba(35, 20, 50, 0.08);
+}
+
+/* Logo centrado y Cuenta a su lado */
+
+.header__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header__account {
+  position: absolute;
+  right: 0;
+}
+.header__logo {
+  color: var(--color-primary);
+  font-size: 1.7rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+  text-decoration: none;
+}
+
+/* Contenedor del menú desplegable */
+.header__account {
+  
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header__account {
+  position: absolute;
+  right: 0;
+}
+
+
+.header__account-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 4px;
+  border: 0;
+  background: transparent;
+  color: var(--color-text);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.header__account-button:hover {
+  color: var(--color-primary);
+}
+
+/* Flecha indicadora */
+.header__arrow {
+  display: inline-block;
+  font-size: 0.9rem;
+  transition: transform 0.2s ease;
+}
+
+.header__arrow--open {
+  transform: rotate(180deg);
+}
+
+/* Opciones del menú Cuenta */
+.header__dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  min-width: 180px;
+  padding: 8px;
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+}
+
+.header__dropdown a {
+  padding: 12px;
+  border-radius: var(--radius-button);
+  color: var(--color-text);
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.header__dropdown a:hover {
+  background: var(--color-surface);
+  color: var(--color-primary);
+}
+
+.header__account-button:focus-visible,
+.header__dropdown a:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+
+/* Grupo de opciones dentro del menú de Cuenta */
+.header__dropdown-group {
+  position: relative;
+  width: 100%;
+}
+
+/* Botón Crear cuenta */
+.header__dropdown-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  padding: 12px 16px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+}
+
+.header__dropdown-toggle:hover {
+  background-color: var(--color-surface);
+}
+
+/* Submenú de Empresa y Cliente */
+.header__submenu {
+  display: flex;
+  flex-direction: column;
+  padding: 4px 0 8px 12px;
+  background-color: var(--color-surface);
+}
+
+.header__submenu a {
+  display: block;
+  padding: 10px 16px;
+  color: inherit;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.header__submenu a:hover {
+  color: var(--color-primary);
+  background-color: rgba(134, 36, 221, 0.06);
+}
+
+/* Ajuste del botón desplegable */
+.header__dropdown-toggle .header__arrow {
+  flex-shrink: 0;
+}
