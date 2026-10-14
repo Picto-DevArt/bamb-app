@@ -1,5 +1,6 @@
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import jsPDF from "jspdf";
 import ClientDashboardHeader from "../components/ClientDashboardHeader";
 import "../styles/client-dashboard.css";
 
@@ -71,9 +72,81 @@ const categories = [
   "Entretenimiento",
 ];
 
+// Recupera el código de la tarjeta o genera uno para este navegador.
+function getOrCreateCardCode() {
+  const storageKey = "bamb-client-card-code";
+  const savedCode = localStorage.getItem(storageKey);
+
+  if (savedCode) {
+    return savedCode;
+  }
+
+  const characters = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
+  function generateSegment(length) {
+    return Array.from({ length }, () => {
+      const index = Math.floor(Math.random() * characters.length);
+      return characters[index];
+    }).join("");
+  }
+
+  const newCode = `BAMB-${generateSegment(4)}-${generateSegment(4)}`;
+
+  localStorage.setItem(storageKey, newCode);
+
+  return newCode;
+}
+
+// Genera la tarjeta Bamb como archivo PDF.
+function downloadBambCard(clientName, cardCode) {
+  const pdf = new jsPDF({
+    orientation: "landscape",
+    unit: "mm",
+    format: [85.6, 54],
+  });
+
+  // Fondo morado de la marca.
+  pdf.setFillColor(134, 36, 221);
+  pdf.rect(0, 0, 85.6, 54, "F");
+
+  // Identidad de la tarjeta.
+  pdf.setTextColor(255, 255, 255);
+  pdf.setFont("helvetica", "bold");
+  pdf.setFontSize(19);
+  pdf.text("BAMB", 7, 12);
+
+  pdf.setFont("helvetica", "normal");
+  pdf.setFontSize(7);
+  pdf.text("TU TARJETA DE BENEFICIOS", 7, 18);
+
+  // Nombre del cliente.
+  pdf.setFont("helvetica", "bold");
+  pdf.setFontSize(10);
+
+  const safeName = clientName || "Cliente Bamb";
+  const nameLines = pdf.splitTextToSize(safeName, 70);
+
+  pdf.text(nameLines.slice(0, 2), 7, 29);
+
+  // Código de la tarjeta.
+  pdf.setFont("helvetica", "normal");
+  pdf.setFontSize(8);
+  pdf.text("CODIGO DE CLIENTE", 7, 40);
+
+  pdf.setFont("helvetica", "bold");
+  pdf.setFontSize(11);
+  pdf.text(cardCode, 7, 47);
+
+  // Acento gráfico en color lima.
+  pdf.setFillColor(215, 223, 35);
+  pdf.circle(76, 9, 4, "F");
+
+  pdf.save(`tarjeta-bamb-${cardCode}.pdf`);
+}
 function ClientDashboard() {
   const [activeSlide, setActiveSlide] = useState(0);
   const [activeCategory, setActiveCategory] = useState("Todas");
+  const [cardCode] = useState(getOrCreateCardCode);
 
   const currentSlide = featuredOffers[activeSlide];
 
@@ -104,6 +177,60 @@ function ClientDashboard() {
           <p>
             Explora ofertas, conoce comercios y encuentra nuevas
             experiencias.
+          </p>
+        </section>
+          
+        <section className="client-bamb-card-section">
+          <div className="client-section-heading">
+            <div>
+              <h2>Mi tarjeta Bamb</h2>
+              <p>Tu tarjeta digital para disfrutar de los beneficios.</p>
+            </div>
+          </div>
+
+          <div className="client-bamb-card">
+            <div className="client-bamb-card-decoration" aria-hidden="true" />
+
+            <div className="client-bamb-card-header">
+              <div className="client-bamb-logo">BAMB</div>
+              <span className="client-bamb-card-label">
+                TARJETA DE BENEFICIOS
+              </span>
+            </div>
+
+            <div className="client-bamb-card-details">
+              <p className="client-bamb-card-caption">TITULAR</p>
+              <h3>
+                {localStorage.getItem("bamb-client-name") || "Cliente Bamb"}
+              </h3>
+            </div>
+
+            <div className="client-bamb-card-footer">
+              <div>
+                <p className="client-bamb-card-caption">CÓDIGO DE CLIENTE</p>
+                <strong>{cardCode}</strong>
+              </div>
+              <span className="client-bamb-card-symbol" aria-hidden="true">
+                B
+              </span>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            className="client-bamb-download-button"
+            onClick={() =>
+              downloadBambCard(
+                localStorage.getItem("bamb-client-name") || "Cliente Bamb",
+                cardCode
+              )
+            }
+          >
+            Descargar mi tarjeta en PDF
+          </button>
+
+          <p className="client-bamb-card-note">
+            Guarda tu tarjeta para tener a mano tu código de cliente.
           </p>
         </section>
 
