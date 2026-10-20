@@ -4,6 +4,7 @@ import "../styles/company-dashboard.css";
 import CompanyDashboardHeader from "../components/CompanyDashboardHeader";
 import CompanyDashboardNav from "../components/CompanyDashboardNav";
 import { Link } from "react-router-dom";
+import { loadOffers, saveOffers } from "../data/offersStorage";
 
 // Datos de prueba mientras conectamos la base de datos.
 const initialOffers = [
@@ -45,10 +46,24 @@ function formatDate(date) {
 }
 
 function CompanyDashboard() {
-  const [offers, setOffers] = useState(initialOffers);
+  const [offers, setOffers] = useState(() => loadOffers(initialOffers));
+
+  function updateOffers(updater) {
+    setOffers((currentOffers) => {
+      const nextOffers = typeof updater === "function" ? updater(currentOffers) : updater;
+      try {
+        saveOffers(nextOffers);
+      } catch (error) {
+        console.error("No fue posible guardar las ofertas:", error);
+        window.alert("No pudimos guardar el cambio en este navegador. Puede que el almacenamiento esté lleno.");
+        return currentOffers;
+      }
+      return nextOffers;
+    });
+  }
 
   function toggleOffer(id) {
-    setOffers((currentOffers) =>
+    updateOffers((currentOffers) =>
       currentOffers.map((offer) => {
         if (offer.id !== id) return offer;
 
@@ -67,7 +82,7 @@ function CompanyDashboard() {
 
     if (!confirmed) return;
 
-    setOffers((currentOffers) =>
+    updateOffers((currentOffers) =>
       currentOffers.filter((offer) => offer.id !== id)
     );
   }

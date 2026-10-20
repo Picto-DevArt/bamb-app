@@ -4,8 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import CompanyDashboardHeader from "../components/CompanyDashboardHeader";
 import CompanyDashboardNav from "../components/CompanyDashboardNav";
 import "../styles/new-offer.css";
+import { loadOffers, saveOffers } from "../data/offersStorage";
 
-const OFFERS_STORAGE_KEY = "bamb-company-offers";
 const MAX_IMAGE_SIZE = 2 * 1024 * 1024;
 
 function NewOffer() {
@@ -101,17 +101,18 @@ function NewOffer() {
     };
 
     try {
-      const storedOffers = localStorage.getItem(OFFERS_STORAGE_KEY);
-      const offers = storedOffers ? JSON.parse(storedOffers) : [];
-
-      if (!Array.isArray(offers)) {
-        throw new Error("Formato de ofertas inválido.");
-      }
-
-      localStorage.setItem(
-        OFFERS_STORAGE_KEY,
-        JSON.stringify([...offers, newOffer])
-      );
+      const offers = loadOffers([]);
+      saveOffers([
+        ...offers,
+        {
+          ...newOffer,
+          name: newOffer.name.trim(),
+          title: newOffer.title.trim(),
+          description: newOffer.description.trim(),
+          totalQuantity: quantity,
+          remainingQuantity: quantity,
+        },
+      ]);
 
       navigate("/empresa/dashboard");
     } catch {

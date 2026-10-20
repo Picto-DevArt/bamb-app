@@ -1,0 +1,78 @@
+.company-account-page {
+  width: min(100% - 32px, 780px);
+  margin: 0 auto;
+  padding: 30px 0 120px;
+}
+.company-account-back {
+  display: inline-block;
+  margin-bottom: 24px;
+  color: var(--color-primary);
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.company-account-heading { margin-bottom: 26px; }
+.company-account-eyebrow {
+  margin: 0 0 10px;
+  color: var(--color-primary);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.6px;
+}
+.company-account-heading h1 { margin: 0 0 10px; font-size: clamp(26px, 5vw, 34px); }
+.company-account-heading > p:last-child { margin: 0; color: var(--color-text-muted); line-height: 1.6; }
+.company-account-form, .company-account-security-link {
+  padding: clamp(18px, 4vw, 30px);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background: white;
+  box-shadow: var(--shadow-card);
+}
+.company-account-photo {
+  display: flex; align-items: center; gap: 16px;
+  padding-bottom: 24px; margin-bottom: 24px;
+  border-bottom: 1px solid var(--color-border);
+}
+.company-account-avatar {
+  display: grid; place-items: center; flex: 0 0 68px;
+  width: 68px; height: 68px; border-radius: 50%;
+  color: white; background: var(--color-primary);
+  font-size: 26px; font-weight: 700;
+}
+.company-account-photo strong { display: block; }
+.company-account-photo p { margin: 6px 0 0; color: var(--color-text-muted); font-size: 13px; line-height: 1.5; }
+.company-account-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 16px; }
+.company-account-fields label { display: grid; align-content: start; gap: 8px; font-size: 14px; font-weight: 700; }
+.company-account-fields input, .company-account-fields select, .company-account-fields textarea {
+  width: 100%; min-height: 46px; padding: 12px;
+  border: 1px solid var(--color-border); border-radius: 9px;
+  color: var(--color-text); background: white; font-weight: 400;
+}
+.company-account-fields textarea { resize: vertical; }
+.company-account-fields input:focus, .company-account-fields select:focus, .company-account-fields textarea:focus {
+  outline: 2px solid rgba(134,36,221,.2); border-color: var(--color-primary);
+}
+.company-account-full { grid-column: 1 / -1; }
+.company-account-fields small { color: var(--color-text-muted); font-size: 12px; font-weight: 400; line-height: 1.5; }
+.company-account-submit {
+  display: block; width: 100%; min-height: 48px; margin-top: 24px;
+  border: 0; border-radius: var(--radius-button);
+  color: white; background: var(--color-primary); font-weight: 700; cursor: pointer;
+}
+.company-account-submit:hover { filter: brightness(.95); }
+.company-account-message, .company-account-error { padding: 12px; border-radius: 8px; font-size: 13px; line-height: 1.5; }
+.company-account-message { color: var(--color-success); background: #e7f5eb; }
+.company-account-error { color: var(--color-error); background: #fff0f0; }
+.company-account-security-link {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 20px;
+}
+.company-account-security-link h2 { margin: 0 0 6px; font-size: 17px; }
+.company-account-security-link p { margin: 0; color: var(--color-text-muted); font-size: 13px; }
+.company-account-security-link a { color: var(--color-primary); font-size: 13px; font-weight: 700; text-decoration: none; white-space: nowrap; }
+.company-security-page { max-width: 680px; }
+.company-security-fields { grid-template-columns: 1fr; }
+@media (max-width: 560px) {
+  .company-account-fields { grid-template-columns: 1fr; }
+  .company-account-full { grid-column: auto; }
+  .company-account-security-link { align-items: flex-start; flex-direction: column; }
+}

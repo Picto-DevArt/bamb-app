@@ -7,6 +7,8 @@ import RegisterClient from "./pages/RegisterClient";
 import CompanyDashboard from "./pages/CompanyDashboard";
 import NewOffer from "./pages/NewOffer";
 import ClientDashboard from "./pages/ClientDashboard";
+import CompanyAccount from "./pages/CompanyAccount";
+import CompanySecurity from "./pages/CompanySecurity";
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
         <Route path="/registro/empresa" element={<RegisterCompany />} />
         <Route path="/registro/cliente" element={<RegisterClient />} />
         <Route path="/empresa/dashboard" element={<CompanyDashboard />} />
+        <Route path="/empresa/cuenta" element={<CompanyAccount />} />
+        <Route path="/empresa/seguridad" element={<CompanySecurity />} />
         <Route path="/empresa/ofertas/nueva" element={<NewOffer />} />
         <Route path="/cliente/dashboard" element={<ClientDashboard />} />
       </Routes>
