@@ -18,14 +18,18 @@ function ClientDashboardHeader() {
   const [success, setSuccess] = useState("");
 
   useEffect(() => {
-    try {
-      setPhoto(localStorage.getItem(PHOTO_STORAGE_KEY) || "");
-      setClientName(
-        localStorage.getItem("bamb-client-name") || "Mi perfil"
-      );
-    } catch {
-      setError("No fue posible recuperar los datos del perfil.");
+    function loadClientProfile() {
+      try {
+        setPhoto(localStorage.getItem(PHOTO_STORAGE_KEY) || "");
+        setClientName(localStorage.getItem("bamb-client-name") || "Mi perfil");
+      } catch {
+        setError("No fue posible recuperar los datos del perfil.");
+      }
     }
+
+    loadClientProfile();
+    window.addEventListener("bamb-client-profile-updated", loadClientProfile);
+    return () => window.removeEventListener("bamb-client-profile-updated", loadClientProfile);
   }, []);
 
   function openModal() {
@@ -146,7 +150,7 @@ function ClientDashboardHeader() {
           </div>
         </div>
 
-        <Link to="/cliente/perfil" className="client-edit-link">
+        <Link to="/cliente/cuenta" className="client-edit-link">
           Mi cuenta
         </Link>
       </header>

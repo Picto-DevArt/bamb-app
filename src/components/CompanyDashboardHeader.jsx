@@ -3,26 +3,49 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 const LOGO_STORAGE_KEY = "bamb-company-logo";
+const PROFILE_STORAGE_KEY = "bamb-company-profile";
+const COMPANY_NAME_STORAGE_KEY = "bamb-company-name";
 const MAX_IMAGE_SIZE = 1 * 1024 * 1024; // 1 MB
 
 function CompanyDashboardHeader() {
-  const companyName = "Mi empresa"; // Dato provisional
   const fileInputRef = useRef(null);
 
+  const [companyName, setCompanyName] = useState(() => {
+    try {
+      const savedProfile = JSON.parse(localStorage.getItem(PROFILE_STORAGE_KEY) || "null");
+      return savedProfile?.companyName?.trim() || localStorage.getItem(COMPANY_NAME_STORAGE_KEY)?.trim() || "Mi empresa";
+    } catch {
+      return localStorage.getItem(COMPANY_NAME_STORAGE_KEY)?.trim() || "Mi empresa";
+    }
+  });
   const [logo, setLogo] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [preview, setPreview] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  // Recupera el logo guardado en este navegador.
+  // Recupera el logo y el nombre guardados en este navegador.
   useEffect(() => {
-    try {
-      const savedLogo = localStorage.getItem(LOGO_STORAGE_KEY);
-      if (savedLogo) setLogo(savedLogo);
-    } catch {
-      setError("No fue posible recuperar el logo guardado.");
+    function loadCompanyData() {
+      try {
+        const savedProfile = JSON.parse(localStorage.getItem(PROFILE_STORAGE_KEY) || "null");
+        const savedName = savedProfile?.companyName?.trim() || localStorage.getItem(COMPANY_NAME_STORAGE_KEY)?.trim();
+        setCompanyName(savedName || "Mi empresa");
+        const savedLogo = localStorage.getItem(LOGO_STORAGE_KEY);
+        setLogo(savedLogo || "");
+      } catch {
+        setError("No fue posible recuperar los datos guardados de la empresa.");
+      }
     }
+
+    loadCompanyData();
+    window.addEventListener("bamb-company-profile-updated", loadCompanyData);
+    window.addEventListener("storage", loadCompanyData);
+
+    return () => {
+      window.removeEventListener("bamb-company-profile-updated", loadCompanyData);
+      window.removeEventListener("storage", loadCompanyData);
+    };
   }, []);
 
   function openLogoModal() {

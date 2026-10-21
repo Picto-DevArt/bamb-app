@@ -49,6 +49,7 @@ function CompanyAccount() {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(form));
       // Compatibilidad con el nombre que ya usa el encabezado.
       localStorage.setItem("bamb-company-name", form.companyName.trim());
+      window.dispatchEvent(new Event("bamb-company-profile-updated"));
       setMessage("Cambios guardados en este navegador.");
       setError("");
     } catch {

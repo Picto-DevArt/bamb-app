@@ -9,6 +9,8 @@ import NewOffer from "./pages/NewOffer";
 import ClientDashboard from "./pages/ClientDashboard";
 import CompanyAccount from "./pages/CompanyAccount";
 import CompanySecurity from "./pages/CompanySecurity";
+import ClientAccount from "./pages/ClientAccount";
+import ClientSecurity from "./pages/ClientSecurity";
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
         <Route path="/empresa/seguridad" element={<CompanySecurity />} />
         <Route path="/empresa/ofertas/nueva" element={<NewOffer />} />
         <Route path="/cliente/dashboard" element={<ClientDashboard />} />
+        <Route path="/cliente/cuenta" element={<ClientAccount />} />
+        <Route path="/cliente/seguridad" element={<ClientSecurity />} />
       </Routes>
     </BrowserRouter>
   );
